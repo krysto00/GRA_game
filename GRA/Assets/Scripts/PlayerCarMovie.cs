@@ -7,10 +7,13 @@ public class PlayerCarMovie : MonoBehaviour
 
     public float carHorizontalSpeed = 5f;
     private Vector3 carPosition;
+    public float maxDurability=100f;
+    public float durability;
     // Start is called before the first frame update
     void Start()
     {
         carPosition = this.gameObject.transform.position;
+        durability=maxDurability;
     }
     // Update is called once per frame
     void Update()
