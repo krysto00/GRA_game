@@ -37,7 +37,7 @@ public class Bonuses : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D obj){
-        if(obj.gameObject.tag == "Player"){
+        if(obj.gameObject.tag == "Player" || obj.gameObject.tag == "Shield"){
             if(isDurability == true){
                 obj.gameObject.GetComponent<PlayerCarMovie>().durability += repairPoints;
                 Destroy(this.gameObject);
@@ -55,7 +55,7 @@ public class Bonuses : MonoBehaviour
                 isActivated=true;
                 StartCoroutine("SpeedBoostActivated");
             }
-        } else if(obj.gameObject.tag == "End" && isActivated == false){
+        } else if(obj.gameObject.tag == "RoadEnd" && isActivated == false){
             Destroy(this.gameObject);
         }
     }
