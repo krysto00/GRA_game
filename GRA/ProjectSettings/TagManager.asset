@@ -7,6 +7,7 @@ TagManager:
   - RoadEnd
   - Untouchable
   - Shield
+  - Barrier
   layers:
   - Default
   - TransparentFX

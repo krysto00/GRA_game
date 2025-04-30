@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BonusSpowner : MonoBehaviour
 {
-
-    private float delay;
     public GameObject[] bonuses;
     public int minDelay;
     public int maxDelay;
+    private float delay;
+    
     // Start is called before the first frame update
     void Start()
     {
