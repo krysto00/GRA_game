@@ -5,8 +5,11 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
 
+public GameObject explosion;
     public int bombDamage;
     public float bombSpeed;
+    [HideInInspector]
+    public int pointsPerBomb;
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +25,16 @@ public class Bomb : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.tag == "Player"){
+            PointsManager.Points -= pointsPerBomb;
             obj.gameObject.GetComponent<PlayerCarMovie>().durability-=bombDamage;
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }else if(obj.gameObject.tag=="Shield"){
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }else if(obj.gameObject.tag=="RoadEnd"){
             Destroy(this.gameObject);
+            PointsManager.Points += pointsPerBomb;
         }
 
     }

@@ -17,11 +17,19 @@ public class PoliceCarBehaviour : MonoBehaviour
     private Vector3 policeCarPos;
     private GameObject bulletObj;
     public int bulletsInSeries;
+    [HideInInspector]
+    public int pointsPerCar;
+
+
+    public AudioClip shotSound;
+    private AudioSource audio;
+    public GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
         lightShowDelay=2*lightDelay;
         shootDelay=shootingSeriesDelay;
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +57,7 @@ public class PoliceCarBehaviour : MonoBehaviour
     }
     IEnumerator Shoot(){
         for(int i=bulletsInSeries;i>0;i--){
+            audio.PlayOneShot(shotSound, 0.77f);
             bulletObj=(GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
             if(isLeft==true){
                 bulletObj.GetComponent<Bullet>().direction=1;
@@ -65,6 +74,8 @@ public class PoliceCarBehaviour : MonoBehaviour
             }else if (isLeft==false){
                 WaveManager.isRight=false;
             }
+            PointsManager.Points += pointsPerCar;
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

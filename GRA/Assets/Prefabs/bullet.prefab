@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a429b0f92ec53944c892df728ce7ca35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 1702689809279290859, guid: a01d6656f3ed71f459d7e76c61f2424a, type: 3}
   bulletDamage: 2
   direction: 0
   bulletSpeed: 15

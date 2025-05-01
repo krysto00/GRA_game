@@ -29,6 +29,12 @@ public class WaveManager  : MonoBehaviour {
     public int bulletsInSeries;
     private GameObject spawnedPoliceCar;
 
+    [Header("Points")]
+    public int pointsPerCivilCar;
+    public int pointsPerBanditCar;
+    public int pointsPerBomb;
+    public int pointsPerPoliceCar;
+
   
     private float[] lanesArray;
     private float spawnDelay;
@@ -83,6 +89,7 @@ public class WaveManager  : MonoBehaviour {
         spawnedPoliceCar.GetComponent<PoliceCarBehaviour>().singleShotDelay = singleShotDelay;
         spawnedPoliceCar.GetComponent<PoliceCarBehaviour>().bulletsInSeries = bulletsInSeries;
         spawnedPoliceCar.GetComponent<PoliceCarBehaviour>().policeCarVerticalSpeed = policeCarVerticalSpeed;
+        spawnedPoliceCar.GetComponent<PoliceCarBehaviour>().pointsPerCar=pointsPerPoliceCar;
        
     }
 
@@ -109,6 +116,8 @@ public class WaveManager  : MonoBehaviour {
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().banditCarVerticalSpeed=banditCarVerticalSpeed;
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().banditCarHorizontalSpeed=banditCarHorizontalSpeed;
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombDelay=bombDelay;
+            spawnedBanditCar.GetComponent<BanditCarBehaviour>().pointsPerCar=pointsPerBanditCar;
+            spawnedBanditCar.GetComponent<BanditCarBehaviour>().bomb.gameObject.GetComponent<Bomb>().pointsPerBomb=pointsPerBomb;
     }
     void spawnCar()
     {
@@ -118,12 +127,15 @@ public class WaveManager  : MonoBehaviour {
             GameObject car = (GameObject)Instantiate(civilCar, new Vector3(lanesArray[lane], 6f, 0), Quaternion.Euler(new Vector3(0, 0, 180)));
             car.GetComponent<CivilCar>().direction = 1;
             car.GetComponent<CivilCar>().civilCarSpeed = 12f;
+            car.GetComponent<CivilCar>().pointsPerCar=pointsPerCivilCar;
+
         }
         if (lane == 2 || lane == 3)
         {
             GameObject car = Instantiate(civilCar, new Vector3(lanesArray[lane], 6f, 0), Quaternion.identity);
             car.GetComponent<CivilCar>().direction = -1;
             car.GetComponent<CivilCar>().civilCarSpeed = 5f;
+            car.GetComponent<CivilCar>().pointsPerCar=pointsPerCivilCar;
     }
     civilCarsAmount--;
     }

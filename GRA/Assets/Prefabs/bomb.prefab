@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85e2760bcb395144bfc20b7744054cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 1702689809279290859, guid: a01d6656f3ed71f459d7e76c61f2424a, type: 3}
   bombDamage: 25
   bombSpeed: 5
+  pointsPerBomb: 20
 --- !u!61 &6856483553413655449
 BoxCollider2D:
   m_ObjectHideFlags: 0

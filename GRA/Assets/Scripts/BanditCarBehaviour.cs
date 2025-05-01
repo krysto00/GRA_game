@@ -10,9 +10,12 @@ public class BanditCarBehaviour : MonoBehaviour
     public int banditCarVerticalSpeed;
     public int banditCarHorizontalSpeed;
     public float bombDelay;
+    [HideInInspector]
+    public int pointsPerCar;
     private float Delay;
     private GameObject playerCar;
     private Vector3 banditCarPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,7 @@ public class BanditCarBehaviour : MonoBehaviour
             }else if (bombAmount <=0){
                 this.gameObject.transform.Translate(new Vector3(0, 1, 0)* banditCarVerticalSpeed * Time.deltaTime);
                 if(gameObject.transform.position.y > 6.5f){
+                    PointsManager.Points += pointsPerCar;
                     Destroy(this.gameObject);
                 }
             }else{
