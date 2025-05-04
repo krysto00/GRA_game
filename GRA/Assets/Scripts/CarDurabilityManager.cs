@@ -9,28 +9,39 @@ public class CarDurabilityManager : MonoBehaviour
     public TextMesh durabilityText;
     public int lifes;
     private GameObject playerCar;
+    public int maxLifes;
+    public GameObject EndGameScreen;
 
     void Start()
     {
+        maxLifes=lifes;
         playerCar = Instantiate(playerCarPrefab, spawnPoint.transform.position, Quaternion.identity);
     }
 
     void Update()
+{
+    if (playerCar.GetComponent<PlayerCarMovie>().durability <= 0)
     {
-        if (playerCar.GetComponent<PlayerCarMovie>().durability <= 0)
+        Destroy(playerCar);
+        lifes--;
+        if (lifes > 0)
         {
-            Destroy(playerCar);
-            lifes--;
-            if (lifes > 0)
-            {
-                StartCoroutine(SpawnaCar());
-            }
-        } else if(playerCar.GetComponent<PlayerCarMovie>().durability > playerCar.GetComponent<PlayerCarMovie>().maxDurability){
-            playerCar.GetComponent<PlayerCarMovie>().durability = playerCar.GetComponent<PlayerCarMovie>().maxDurability;
+            StartCoroutine(SpawnaCar());
         }
-
-        durabilityText.text = "Durability: " + playerCar.GetComponent<PlayerCarMovie>().durability + "/" + playerCar.GetComponent<PlayerCarMovie>().maxDurability;
+        else if (lifes <= 0)
+        {
+            Time.timeScale=0;
+            EndGameScreen.SetActive(true);
+        }
     }
+    else if (playerCar.GetComponent<PlayerCarMovie>().durability > playerCar.GetComponent<PlayerCarMovie>().maxDurability)
+    {
+        playerCar.GetComponent<PlayerCarMovie>().durability = playerCar.GetComponent<PlayerCarMovie>().maxDurability;
+    }
+
+    durabilityText.text = "Durability: " + playerCar.GetComponent<PlayerCarMovie>().durability + "/" + playerCar.GetComponent<PlayerCarMovie>().maxDurability;
+}
+
 
     IEnumerator SpawnaCar()
     {

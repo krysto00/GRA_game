@@ -11,6 +11,9 @@ public class MenuFunctionality : MonoBehaviour
 
     public float lightDelay;
     private float delay;
+    public GameObject highscores;
+
+    public GameObject menuButtons;
 
 
     // Start is called before the first frame update
@@ -19,6 +22,10 @@ public class MenuFunctionality : MonoBehaviour
         delay=lightDelay;
         redLight.enabled=true;
         blueLight.enabled=false;
+        if(PlayerPrefsX.GetIntArray("HighScoreArray", 0, 10)[0]==0){
+        int[] highscoresInitializationArray = new int[10] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        PlayerPrefsX.SetIntArray("HighscoreArray", highscoresInitializationArray);
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +44,8 @@ public class MenuFunctionality : MonoBehaviour
     }
 
     public void HighScoreButton(){
-
+        menuButtons. SetActive(false);
+        highscores. SetActive(true);
     }
 
     public void OptionsButton(){
@@ -46,5 +54,10 @@ public class MenuFunctionality : MonoBehaviour
 
     public void ExitButton(){
         Application.Quit();
+    }
+
+    public void GoBackButton(){
+        highscores.SetActive(false);
+        menuButtons.SetActive(true);
     }
 }

@@ -38,7 +38,7 @@ public class BanditCarBehaviour : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }else{
-                banditCarPos=Vector3.Lerp(transform.position, playerCar.transform.position, Time.fixedDeltaTime*banditCarHorizontalSpeed);
+                banditCarPos=Vector3.Lerp(transform.position, playerCar.transform.position, Time.deltaTime*banditCarHorizontalSpeed);
                 transform.position=new Vector3(banditCarPos.x, transform.position.y, 0);
 
                 Delay -= Time.deltaTime;

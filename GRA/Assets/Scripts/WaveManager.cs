@@ -34,6 +34,7 @@ public class WaveManager  : MonoBehaviour {
     public int pointsPerBanditCar;
     public int pointsPerBomb;
     public int pointsPerPoliceCar;
+    public GameObject EndGameScreen;
 
   
     private float[] lanesArray;
@@ -66,6 +67,9 @@ public class WaveManager  : MonoBehaviour {
         } else if (civilCarsAmount <= 0 && policeCarAmount > 0 && spawnedBanditCar == null)
         {
             spawnPoliceCar();
+        }else if(policeCarAmount<=0 && isLeft==false && isRight==false){
+            Time.timeScale=0;
+            EndGameScreen.SetActive(true);
         }
     }
 
