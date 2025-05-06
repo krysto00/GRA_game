@@ -11,9 +11,11 @@ public class CarDurabilityManager : MonoBehaviour
     private GameObject playerCar;
     public int maxLifes;
     public GameObject EndGameScreen;
+    public GameObject[] hearts;
 
     void Start()
     {
+        durabilityText.GetComponent<MeshRenderer>().sortingLayerName = "Durability";
         maxLifes=lifes;
         playerCar = Instantiate(playerCarPrefab, spawnPoint.transform.position, Quaternion.identity);
     }
@@ -24,6 +26,7 @@ public class CarDurabilityManager : MonoBehaviour
     {
         Destroy(playerCar);
         lifes--;
+        Destroy(hearts[lifes]);
         if (lifes > 0)
         {
             StartCoroutine(SpawnaCar());

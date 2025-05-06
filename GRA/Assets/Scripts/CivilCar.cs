@@ -31,6 +31,9 @@ public class CivilCar : MonoBehaviour
             Debug.Log("Il giocatore ci ha colpiti");
             Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
+        }else if(obj.gameObject.tag=="Shield"){
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }else if (obj.gameObject.tag == "RoadEnd")
         {
             PointsManager.Points += pointsPerCar;

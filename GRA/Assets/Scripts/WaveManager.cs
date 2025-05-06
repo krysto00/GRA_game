@@ -60,7 +60,7 @@ public class WaveManager  : MonoBehaviour {
             {
                 spawnBanditCar();
             }
-            else if (isSpawned == true && spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombAmount < 5 && is2ndSpawned == false)
+            else if (isSpawned == true && spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombAmount < 10 && is2ndSpawned == false)
             {
                 spawnBanditCar();
             }
@@ -76,13 +76,23 @@ public class WaveManager  : MonoBehaviour {
 
     void spawnPoliceCar()
     {
-        if(GameObject.FindWithTag("Player").gameObject.transform.position.x <= -0.51f && isRight == false)
+        Transform playerCarPosition;
+        if(GameObject.FindWithTag("Player")){
+            playerCarPosition=GameObject.FindWithTag("Player").transform;
+        }else if(GameObject.FindWithTag("Shield")){
+            playerCarPosition=GameObject.FindWithTag("Shield").transform;
+        }else if(GameObject.FindWithTag("Untouchable")){
+            playerCarPosition=GameObject.FindWithTag("Untouchable").transform;
+        }else{
+            playerCarPosition=null;
+        }
+        if(playerCarPosition.position.x <= -0.51f && isRight == false)
         {
             spawnedPoliceCar = (GameObject)Instantiate(policeCar, new Vector3(2.02f, -5.5f, 0), Quaternion.identity);
             spawnedPoliceCar.GetComponent<PoliceCarBehaviour>().isLeft = false;
             isRight = true;
             policeCarAmount--;
-        } else if (GameObject.FindWithTag("Player").gameObject.transform.position.x > -0.51f && isLeft == false)
+        } else if (playerCarPosition.position.x > -0.51f && isLeft == false)
         {
             spawnedPoliceCar = (GameObject)Instantiate(policeCar, new Vector3(-2.02f, -5.5f, 0), Quaternion.identity);
             spawnedPoliceCar.GetComponent<PoliceCarBehaviour>().isLeft = true;
@@ -105,7 +115,7 @@ public class WaveManager  : MonoBehaviour {
     void spawnBanditCar(){
         if(isSpawned==false){
             spawnedBanditCar=(GameObject)Instantiate(banditCar, new Vector3(Random.Range(-2.25f, 2.25f), 7f, 0), Quaternion.identity);
-            
+            spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombDelay=bombDelay;
             isSpawned=true;
         }else if(isSpawned==true && is2ndSpawned == false){
             if(spawnedBanditCar.transform.position.x < 0.45f){
@@ -115,11 +125,11 @@ public class WaveManager  : MonoBehaviour {
                 spawnedBanditCar=(GameObject)Instantiate(banditCar, new Vector3(-2.2f, 7f, 0), Quaternion.identity);
                 is2ndSpawned=true;
         }
+        spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombDelay=bombDelay/1.5f;
     }
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombAmount=bombAmount;
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().banditCarVerticalSpeed=banditCarVerticalSpeed;
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().banditCarHorizontalSpeed=banditCarHorizontalSpeed;
-            spawnedBanditCar.GetComponent<BanditCarBehaviour>().bombDelay=bombDelay;
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().pointsPerCar=pointsPerBanditCar;
             spawnedBanditCar.GetComponent<BanditCarBehaviour>().bomb.gameObject.GetComponent<Bomb>().pointsPerBomb=pointsPerBomb;
     }

@@ -10,6 +10,7 @@ public class PointsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Points=0;
         this.gameObject.GetComponent<MeshRenderer>().sortingLayerName = "Points";
         this.gameObject.GetComponent<TextMesh>().color = new Color(1f, 1f, 1f, 0.7f);
     }
@@ -22,6 +23,9 @@ public class PointsManager : MonoBehaviour
         if(secondDelay<=0){
             Points+=1;
             secondDelay=1;
+            if(Points<0){
+                Points=0;
+            }
         }
     }
 }

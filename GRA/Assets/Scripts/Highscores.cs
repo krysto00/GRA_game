@@ -29,6 +29,9 @@ public class HighScores : MonoBehaviour
             highScoresText.text = "";
             for (int i = 0; i < highScoresArray.Length && highScoresArray[i] != 0; i++)
             {
+                if(i==9){
+                    break;
+                }
                 highScoresText.text += (i + 1) + ". " + highScoresArray[i] + " pt " + System.Environment.NewLine;
             }
         }

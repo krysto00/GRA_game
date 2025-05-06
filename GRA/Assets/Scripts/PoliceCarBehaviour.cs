@@ -49,7 +49,7 @@ public class PoliceCarBehaviour : MonoBehaviour
             gameObject.transform.Translate(new Vector3(0, 1, 0) * policeCarVerticalSpeed * Time.deltaTime);
         }else{
             shootDelay -= Time.deltaTime;
-            if(shootDelay<=0){
+            if(shootDelay<=0 && GameObject.FindWithTag("Untouchable")==false){
                 StartCoroutine("Shoot");
                 shootDelay=shootingSeriesDelay;
             }

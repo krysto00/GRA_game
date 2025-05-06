@@ -14,6 +14,7 @@ public class MenuFunctionality : MonoBehaviour
     public GameObject highscores;
 
     public GameObject menuButtons;
+    public GameObject settingsMenu;
 
 
     // Start is called before the first frame update
@@ -49,6 +50,8 @@ public class MenuFunctionality : MonoBehaviour
     }
 
     public void OptionsButton(){
+        menuButtons.SetActive(false);
+        settingsMenu.SetActive(true);
 
     }
 
