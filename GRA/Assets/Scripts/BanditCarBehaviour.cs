@@ -27,7 +27,7 @@ public class BanditCarBehaviour : MonoBehaviour
             playerCar=GameObject.FindWithTag("Player");
         }else{
         banditCarPos=Vector3.Lerp(transform.position, playerCar.transform.position, Time.deltaTime*banditCarHorizontalSpeed);
-        Mathf.Clamp(banditCarPos.x, -2.35f, 2.35f);
+        Mathf.Clamp(banditCarPos.x, -1.9f, 1.9f);
         transform.position=new Vector3(banditCarPos.x, transform.position.y, 0);
         }
     }

@@ -45,4 +45,14 @@ public class Pause : MonoBehaviour
     public void ExitButton(){
         Application.Quit();
     }
+
+    public void PauseFromButton()
+{
+    if (Time.timeScale != 0)
+    {
+        tempTimeScale = Time.timeScale;
+    }
+    PauseGame();
+}
+
 }
